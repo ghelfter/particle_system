@@ -1,0 +1,8 @@
+# .swp files from vim
+**/*.swp
+
+# Object files
+**/*.o
+
+# Executable
+**/run
