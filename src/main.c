@@ -8,15 +8,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* OpenCL headers */
-#include <CL/cl.h>
-#include <CL/opencl.h>
-
 /* OpenGL headers */
 #include <GL/glew.h>
 
 /* GLFW headers */
 #include <GLFW/glfw3.h>
+
+/* OpenCL headers */
+#include <CL/cl.h>
+#include <CL/opencl.h>
+#include <CL/cl_ext.h>
+#include <CL/cl_gl_ext.h>
+#include <CL/cl_platform.h>
 
 /* Local headers */
 #include "load_cl.h"
