@@ -8,13 +8,13 @@ SHELL = /bin/sh
 
 # Compiler and linker flags
 CC = gcc
-#INC = -I/usr/local/cuda/include
-#LIB = -L/usr/local/cuda/lib64
+INC = -I/usr/lib/x86_64-linux-gnu
+LIB = -L/usr/lib/x86_64-linux-gnu
 CFLAGS = -g -W -Wall -Wdeclaration-after-statement \
 		 -pedantic -Wextra -O0 -std=c89 $(INC)
 LDFLAGS = -g -W -Wall -Wdeclaration-after-statement \
 		  -pedantic -Wextra -O0 -std=c89 $(LIB)
-LIBS = -lm -lOpenCL
+LIBS = -lm -lOpenCL -lGLEW -lglfw
 
 TARFILE = particle_system.tar.gz
 ZIPFILE = particle_system.zip
