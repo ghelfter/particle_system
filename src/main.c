@@ -28,7 +28,7 @@
 #define INIT_OPENCL_FAILURE   1
 #define INIT_OPENCL_NO_DEVICE 2
 
-void print_usage();
+void print_usage(FILE *fd);
 int initialize_opencl(cl_platform_id *id);
 
 int main(int argc, char **argv)
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
     /* Check for appropriate arguments */
     if(argc < 2)
     {
-        print_usage();
+        print_usage(stdout);
         retval = 1;
         goto CLEANUP;
     }
@@ -107,9 +107,9 @@ CLEANUP:
     return retval;
 }
 
-void print_usage()
+void print_usage(FILE *fd)
 {
-    fprintf(stdout, "Usage: ./run {kernel-file}\n");
+    fprintf(fd, "Usage: ./run {kernel-file}\n");
 }
 
 int initialize_opencl(cl_platform_id *id)

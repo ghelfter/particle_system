@@ -24,6 +24,7 @@ CLEANFILES = *.o *.out core.* $(TARFILE) $(ZIPFILE)
 
 # Object file list
 OBJECTS =	main.o \
+			init_gl.o \
 			load_cl.o
 
 # Programs
