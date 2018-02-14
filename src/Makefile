@@ -14,7 +14,7 @@ CFLAGS = -g -W -Wall -Wdeclaration-after-statement \
 		 -pedantic -Wextra -O0 -std=c89 $(INC)
 LDFLAGS = -g -W -Wall -Wdeclaration-after-statement \
 		  -pedantic -Wextra -O0 -std=c89 $(LIB)
-LIBS = -lm -lOpenCL -lGLEW -lglfw
+LIBS = -lm -lOpenCL -lGL -lGLEW -lglfw
 
 TARFILE = particle_system.tar.gz
 ZIPFILE = particle_system.zip
@@ -26,6 +26,7 @@ CLEANFILES = *.o *.out core.* $(TARFILE) $(ZIPFILE)
 OBJECTS =	main.o \
 			init_gl.o \
 			init_cl.o \
+			interop.o \
 			load_shader.o
 
 # Programs
