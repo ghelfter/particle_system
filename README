@@ -4,7 +4,12 @@ This project contains a particle system, written in OpenCL, with OpenGL and
 GLFW for rendering and displaying it. It integrates over a timestep using a
 set of forces.
 
+Completed:
+    * Initialize GLFW window and context
+    * Initialize OpenCL base level function
+
 Things to add:
+    * OpenCL context initialization
     * Proper loading and compilation of OpenCL code
     * Proper set of kernels for calculating a particle or physics simulation
     * Set up of OpenGL and GLSL code
