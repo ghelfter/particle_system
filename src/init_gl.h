@@ -15,5 +15,6 @@
 #define GL_INIT_NO_WINDOW 3
 
 int initialize_glfw(GLFWwindow **window, int w, int h, const char *title);
+int cleanup_glfw(GLFWwindow **window);
 
 #endif /* _INIT_GL_H_ */

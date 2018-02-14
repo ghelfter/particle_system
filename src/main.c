@@ -22,14 +22,19 @@
 #include <CL/cl_platform.h>
 
 /* Local headers */
-#include "load_cl.h"
+#include "load_shader.h"
+#include "init_gl.h"
+#include "init_cl.h"
 
 #define INIT_OPENCL_SUCCESS   0
 #define INIT_OPENCL_FAILURE   1
 #define INIT_OPENCL_NO_DEVICE 2
 
+#define WIDTH 640
+#define HEIGHT 480
+#define TITLE "Particle Simulation"
+
 void print_usage(FILE *fd);
-int initialize_opencl(cl_platform_id *id);
 
 int main(int argc, char **argv)
 {
@@ -58,6 +63,15 @@ int main(int argc, char **argv)
         kernel_file = argv[1];
     }
 
+    rcode = initialize_glfw(&window, WIDTH, HEIGHT, TITLE);
+
+    if(rcode != GL_INIT_SUCCESS)
+    {
+        fprintf(stderr, "Error - OpenCL failed to initialize.\n");
+        retval = EXIT_FAILURE;
+        goto CLEANUP;
+    }
+
     /* Initialize OpenCL */
     rcode = initialize_opencl(&platform);
 
@@ -81,7 +95,7 @@ int main(int argc, char **argv)
         goto CLEANUP;
     }
 
-    kernel_data = load_cl_source(kernel_file, kernel_size);
+    kernel_data = load_shader_source(kernel_file, kernel_size);
 
     if(kernel_data == NULL)
     {
@@ -104,43 +118,13 @@ CLEANUP:
         free(kernel_data);
         kernel_data = NULL;
     }
+
+    cleanup_glfw(&window);
+
     return retval;
 }
 
 void print_usage(FILE *fd)
 {
     fprintf(fd, "Usage: ./run {kernel-file}\n");
-}
-
-int initialize_opencl(cl_platform_id *id)
-{
-    int retval = 0;
-    cl_int result = 0;
-    cl_platform_id platform;
-    cl_uint ndevices = 0u;
-
-    result = clGetPlatformIDs(0, NULL, &ndevices);
-
-    if(result != CL_SUCCESS)
-    {
-        retval = INIT_OPENCL_FAILURE;
-        goto CLEANUP;
-    }
-    else if(ndevices == 0u)
-    {
-        retval = INIT_OPENCL_NO_DEVICE;
-        goto CLEANUP;
-    }
-
-    result = clGetPlatformIDs(1, &platform, NULL);
-    if(result != CL_SUCCESS)
-    {
-        retval = INIT_OPENCL_FAILURE;
-        goto CLEANUP;
-    }
-
-    *id = platform;
-
-CLEANUP:
-    return retval;
 }

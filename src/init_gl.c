@@ -36,3 +36,24 @@ int initialize_glfw(GLFWwindow **window, int w, int h, const char *title)
 
     return retcode;
 }
+
+int cleanup_glfw(GLFWwindow **window)
+{
+    int retcode = GL_INIT_SUCCESS;
+
+    if(window == NULL)
+    {
+        retcode = GL_INIT_NULL_PTR;
+    }
+    else
+    {
+        if(*window != NULL)
+        {
+            glfwDestroyWindow(*window);
+            *window = NULL;
+        }
+        glfwTerminate();
+    }
+
+    return retcode;
+}
