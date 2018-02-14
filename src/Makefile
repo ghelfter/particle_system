@@ -14,16 +14,16 @@ CFLAGS = -g -W -Wall -Wdeclaration-after-statement \
 		 -pedantic -Wextra -O0 -std=c89 $(INC)
 LDFLAGS = -g -W -Wall -Wdeclaration-after-statement \
 		  -pedantic -Wextra -O0 -std=c89 $(LIB)
-LIBS = -lm -lOpenCL -lGL -lGLEW -lglfw
+LIBS = -lm -lOpenCL -lGL -lGLEW -lglfw -lcjson
 
 TARFILE = particle_system.tar.gz
 ZIPFILE = particle_system.zip
-
 
 CLEANFILES = *.o *.out core.* $(TARFILE) $(ZIPFILE)
 
 # Object file list
 OBJECTS =	main.o \
+			config.o \
 			init_gl.o \
 			init_cl.o \
 			interop.o \

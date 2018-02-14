@@ -1,0 +1,7 @@
+{
+    "title" : "Particle System",
+    "width" : 640,
+    "height" : 480,
+    "vshader" : "../shaders/vertex_shader.vert",
+    "fshader" : "../shaders/particles.frag"
+}
