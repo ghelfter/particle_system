@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 
     FILE *fd = NULL;
 
-    int retval = 0;
+    int retval = EXIT_SUCCESS;
     int rcode = 0;
 
 
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
     if(argc < 2)
     {
         print_usage(stdout);
-        retval = 1;
+        retval = EXIT_FAILURE;
         goto CLEANUP;
     }
     else
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
     if(rcode != INIT_OPENCL_SUCCESS)
     {
         fprintf(stderr, "Error - OpenCL failed to initialize.\n");
-        retval = 1;
+        retval = EXIT_FAILURE;
         goto CLEANUP;
     }
     
@@ -91,7 +91,7 @@ int main(int argc, char **argv)
     if(kernel_size < 0)
     {
         fprintf(stderr, "Error opening kernel file %s\n", kernel_file);
-        retval = 1;
+        retval = EXIT_FAILURE;
         goto CLEANUP;
     }
 
@@ -101,11 +101,19 @@ int main(int argc, char **argv)
     {
         fprintf(stderr, "Failure to allocate %d bytes of memory\n",
                 kernel_size);
-        retval = 1;
+        retval = EXIT_FAILURE;
         goto CLEANUP;
     }
 
     /* Compile kernel */
+
+    /* Perform main application loop */
+    while(!glfwWindowShouldClose(window))
+    {
+        glClear(GL_COLOR_BUFFER_BIT);
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
 
 CLEANUP:
     if(fd != NULL)
