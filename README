@@ -6,10 +6,12 @@ set of forces.
 
 Completed:
     * Initialize GLFW window and context
+    * Initialize GLEW
     * Initialize OpenCL base level function
 
 Things to add:
     * OpenCL context initialization
+    * Add JSON configuration file support
     * Proper loading and compilation of OpenCL code
     * Proper set of kernels for calculating a particle or physics simulation
     * Set up of OpenGL and GLSL code

@@ -39,6 +39,21 @@ int initialize_glfw(GLFWwindow **window, int w, int h, const char *title)
     return retcode;
 }
 
+int initialize_glew()
+{
+    int retcode = GL_INIT_SUCCESS;
+    glewExperimental = GL_TRUE;
+    GLenum err;
+
+    err = glewInit();
+    if(err != GLEW_OK)
+    {
+        retcode = GL_INIT_FAIL_INIT;
+    }
+
+    return retcode;
+}
+
 int cleanup_glfw(GLFWwindow **window)
 {
     int retcode = GL_INIT_SUCCESS;

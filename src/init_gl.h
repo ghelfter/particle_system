@@ -16,6 +16,7 @@
 #define GL_INIT_BAD_ALLOC 4
 
 int initialize_glfw(GLFWwindow **window, int w, int h, const char *title);
+int initialize_glew();
 int cleanup_glfw(GLFWwindow **window);
 
 int create_gl_texture(GLuint *tex, GLuint w, GLuint h);

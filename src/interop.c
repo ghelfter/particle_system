@@ -35,7 +35,15 @@ int interrupt_for_kernel(cl_command_queue cq, cl_kernel kernel,
     }
     else
     {
+        /* Transfer over to OpenCL from OpenGL */
         glFinish();
+        clEnqueueAcquireGLObjects(cq, 1, &mem, 0, 0, NULL);
+
+        clSetKernelArg(kernel, 0, sizeof(mem), mem);
+
+        /* Finish OpenCL actions and transfer back to OpenGL */
+        clFinish(cq);
+        clEnqueueReleaseGLObjects(cq, 1, &mem, 0, 0, NULL);
     }
 
     return retcode;

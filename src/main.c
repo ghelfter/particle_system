@@ -64,10 +64,17 @@ int main(int argc, char **argv)
     }
 
     rcode = initialize_glfw(&window, WIDTH, HEIGHT, TITLE);
-
     if(rcode != GL_INIT_SUCCESS)
     {
-        fprintf(stderr, "Error - OpenCL failed to initialize.\n");
+        fprintf(stderr, "Error - GLFW failed to initialize.\n");
+        retval = EXIT_FAILURE;
+        goto CLEANUP;
+    }
+
+    rcode = initialize_glew();
+    if(rcode != GL_INIT_SUCCESS)
+    {
+        fprintf(stderr, "Error - GLEW failed to initialize.\n");
         retval = EXIT_FAILURE;
         goto CLEANUP;
     }
